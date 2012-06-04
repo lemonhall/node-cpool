@@ -5,7 +5,7 @@ def configure(ctx):
     pass
 
 def build(ctx):
-	ctx.recurse('test')
+	ctx(rule='jshint ${SRC}', source='../lib/cpool.js')
 
 
 	

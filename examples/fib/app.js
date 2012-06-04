@@ -1,14 +1,17 @@
 var util = require('util')
-   ,cp  = require('./cp_pool.js');
+   ,cp  = require('cpool');
    
 var p = cp.createPool();
 
+// 4 child processes
+// execute ./fib.js 
+// maximum 10 messages in pending queue
 p.init(4,'./fib.js',10);
 
 
 p.on('message',function(msg) {
   console.log('msg',msg);
-  console.log('app',p.getReadyQueueLength(),p.getMessageQueueLength());
+  console.log('app',p.getReadyQueueLength(),p.getPendQueueLength());
 });
 
 setInterval(function() {
