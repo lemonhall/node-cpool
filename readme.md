@@ -72,24 +72,24 @@ var cpool = require('cpool');
             timeout      Number (Default: 0)
         Return: Cpool object
         
-        var cp = cpool.fork('./file.js',args,options);
+        var pool = cpool.fork('./file.js',args,options);
 
         
-    function cp.send(msg)
+    function pool.send(msg)
         returns true if the message is sent, false if the message would make the 
         size of the pending message
         same as child_process.send except does not support a serverHandle second argument
         
-    function cp.on('message',function(msg) {...})
+    function pool.on('message',function(msg) {...})
         executed when one of the child processes sends a response event using process.send(msg)
         same as child_process.on except does not support a serverHandle second 
         argument to the event handler function
 
-    function cp.getReadyQueueLength()
+    function pool.getReadyQueueLength()
         returns the number of child processes that are idle and waiting to process a 
         message from the cp.send function
         
-    function cp.getPendQueueLength()
+    function pool.getPendQueueLength()
         returns the number of pending messages waiting to be given to a child process. 
         messages go into the pend queue
         when all child processes are busy servicing other messages.
