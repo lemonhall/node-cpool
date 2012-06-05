@@ -54,7 +54,7 @@ var cpool = require('cpool');
         returns an empty child process pool object. 
         the empty child process object is not initialized at this point
         the child object is an event emitter.
-        var cp = cpool.createPool();
+        var cp = cpool.createPool(1,1);
         see example/fib/app.js
         
     function cp.fork(modulePath,[optional arguments],[options]) 
@@ -72,7 +72,7 @@ var cpool = require('cpool');
             timeout      Number (Default: 0)
         Return: Cpool object
         
-        var cp = cpool.init('./file.js',args,options);
+        var cp = cpool.fork('./file.js',args,options);
 
         
     function cp.send(msg)
