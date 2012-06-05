@@ -1,9 +1,19 @@
-// process.argv has any arguments that are used for initialization
-// when the child script is loaded
-console.log(process.argv);
+function fib(m) {
+  if ((m === 0)||(m === 1)) {
+    return m;
+  }
+  else {
+    return fib(m-1) + fib(m-2);
+  }
+}
 
 process.on('message',function(msg) {
-  // echo the input message
-  process.send(msg);
+  var r;
+  
+  // compute fibonacci number
+  r = fib(msg);
+  
+  // return it to caller
+  process.send(r);
 });
 

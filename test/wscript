@@ -1,11 +1,11 @@
 def options(ctx):
-    pass   
+  pass   
 
 def configure(ctx):
-    pass
+  pass
 
 def build(ctx):
-	ctx(rule='jshint ${SRC}', source='../lib/cpool.js')
-
+  ctx(rule='jshint ${SRC}', source='../lib/cpool.js')
+  ctx(rule='mocha --ui tdd -R list ${SRC}',source='cpool.test.js')
 
 	

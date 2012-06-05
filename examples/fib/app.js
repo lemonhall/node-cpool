@@ -1,12 +1,12 @@
 var util = require('util')
    ,cp  = require('cpool');
    
-var p = cp.createPool();
+var p = cp.createPool(4,10);
 
 // 4 child processes
 // execute ./fib.js 
 // maximum 10 messages in pending queue
-p.init(4,'./fib.js',10);
+p.fork('./fib.js');
 
 
 p.on('message',function(msg) {
