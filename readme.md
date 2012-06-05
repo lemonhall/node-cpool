@@ -72,7 +72,7 @@ var cpool = require('cpool');
             timeout      Number (Default: 0)
         Return: Cpool object
         
-        var cp = cpool.init(5,10,'./file.js',args,options);
+        var cp = cpool.init('./file.js',args,options);
 
         
     function cp.send(msg)
