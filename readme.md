@@ -27,8 +27,10 @@ and farm out the messages to the pool.
 
 The cpool module does this for you. It presents an API that is similar to the child_process.fork API with the difference
 that it is backed by a pool of forked node processes. Cpool manages the processes and doles out messages in 
-an efficient manner. It keeps track of which children are busy and which are ready to run, and sends activates
-the ready ones when new messages arrive to be sent to the children.  
+an efficient manner. It keeps track of which children are busy and which are ready to run, and activates
+the ready ones when new messages arrive to be sent to the children.  If the main node process sends
+more messages than there are ready children, they are queued in the 'pend queue' and are serviced
+in FIFO order as busy child processes finish their previous operation and become ready.
 
 Features
 ========
@@ -97,13 +99,12 @@ var cpool = require('cpool');
     // app.js
     var cpool  = require('cpool');
 
-    // create an empty child process pool   
-    var p = cpool.createPool();
-
     // create 4 child processes in the pool
-    // child processes execute the code in ./echo.js 
     // maximum 10 messages in pending queue
-    p.init(4,'./echo.js',10);
+    var p = cpool.createPool(4,10);
+
+    // child processes execute the code in ./echo.js 
+    p.fork('./echo.js');
 
     // receive responses from the child process pool
     p.on('message',function(msg) {
@@ -117,8 +118,9 @@ var cpool = require('cpool');
 #### child process
     // echo.js
     
-    // process.argv has any arguments that are used for initialization
-    // when the child is loaded
+    // process.argv contains the [optional arguments] and 
+    // can be used for initialization when the child is 
+    // loaded
     console.log(process.argv);
 
     process.on('message',function(msg) {
