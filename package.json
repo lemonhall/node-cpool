@@ -1,17 +1,19 @@
 {
   "author": "David Howard <dmh2000@gmail.com>",
   "name": "cpool",
-  "description": "child process pool manager",
   "version": "0.0.1",
+  "description": "child process pool manager",
+  "keywords":["child_process","fork","pool"],  
   "repository": {
     "type": "git",
-    "url": "git://github.com/dmh2000/cpool.git"
+    "url": "git://github.com/dmh2000/node-cpool.git"
   },
+  "main":"index",
   "scripts": {
-    "test": "make"
+    "test": "waf"
   },
   "engines": {
-    "node": "~0.6.18"
+    "node": "0.6.0"
   },
   "dependencies": {},
   "devDependencies": {
