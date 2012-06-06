@@ -27,7 +27,7 @@ and farm out the messages to the pool.
 
 The cpool module does this for you. It presents an API that is similar to the child_process.fork API with the difference
 that it is backed by a pool of forked node processes. Cpool manages the processes and doles out messages in 
-an efficient manner. It keeps track of which children are busy and which are ready to run, and activates
+an (hopefully) efficient manner. It keeps track of which children are busy and which are ready to run, and activates
 the ready ones when new messages arrive to be sent to the children.  If the main node process sends
 more messages than there are ready children, they are queued in the 'pend queue' and are serviced
 in FIFO order as busy child processes finish their previous operation and become ready.
